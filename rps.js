@@ -1,3 +1,12 @@
+function incrementScore (){
+  score += 1;
+  scoreElement.textContent = score;
+  if (score == 5){
+    scoreElement.textContent = score + "woah u won!";
+    buttons.forEach( key => key.removeEventListener(('click'), game));
+  }
+}
+
 function getComputerChoice (){
   let rand_num = Math.floor(Math.random() * 3);
   switch (rand_num){
@@ -20,6 +29,7 @@ function playRound (player1, computer){
     else if (computer == 'paper'){
       return "You lose :( Paper beats rock";
     }else{
+      incrementScore();
       return "You win! Rock beats scissors";
     }
   }
@@ -31,6 +41,7 @@ function playRound (player1, computer){
     else if (computer == 'scissors'){
       return "You lose :( Scissors beats paper";
     }else{
+      incrementScore();
       return "You win! Paper beats rock";
     }
   }
@@ -42,18 +53,24 @@ function playRound (player1, computer){
     else if (computer == 'rock'){
       return "You lose :( Rock beats scissors";
     }else{
+      incrementScore();
       return "You win! Scissors beats paper";
     }
   }
 
 }
 
-function game(){
-  for (let i = 0; i < 5; i++){
-    playerSelection = prompt("Enter rps choice:");
-    computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-  }
+function game(event){
+
+  computerSelection = getComputerChoice();
+  playerSelection = event.target.id;
+  console.log(playRound(playerSelection, computerSelection));
+
 }
 
-game();
+//game();
+var score = 0;
+const buttons = document.querySelectorAll('button');
+const scoreElement = document.querySelector('.score');
+console.log(buttons);
+buttons.forEach( key => key.addEventListener(('click'), game));
