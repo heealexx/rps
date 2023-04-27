@@ -2,5 +2,46 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: black;
+  color: white;
+  min-height: 100vh;
 }
 
+img {
+  width: 140px;
+  height: auto;
+}
+
+#title {
+  margin-top: 50px;
+  font-size: xx-large;
+  margin-bottom: 0;
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 100px;
+}
+
+.scores #player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.scores #computer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choices {
+  display: flex;
+  margin-top: 100px;
+  gap: 20px;
+}
+
+#footer {
+  margin-top: auto;
+}

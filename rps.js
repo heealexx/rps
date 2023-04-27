@@ -1,10 +1,20 @@
 function incrementScore (){
-  score += 1;
-  scoreElement.textContent = score;
-  if (score == 5){
-    scoreElement.textContent = score + "woah u won!";
+  playerScore += 1;
+  playerScoreElement.textContent = `Your score: ${playerScore}`;
+  if (playerScore == 5){
+    playerScoreElement.textContent = "Wowzers you won!";
     buttons.forEach( key => key.removeEventListener(('click'), game));
   }
+}
+
+function incrementComputerScore (){
+  computerScore += 1;
+  computerScoreElement.textContent = `Enemy score: ${computerScore}`;
+  if (computerScore == 5){
+    computerScoreElement.textContent = "...You really lost to a bot...";
+    buttons.forEach( key => key.removeEventListener(('click'), game));
+  }
+
 }
 
 function getComputerChoice (){
@@ -27,6 +37,7 @@ function playRound (player1, computer){
       return "Tie!";
     }
     else if (computer == 'paper'){
+      incrementComputerScore();
       return "You lose :( Paper beats rock";
     }else{
       incrementScore();
@@ -39,6 +50,7 @@ function playRound (player1, computer){
       return "Tie!";
     }
     else if (computer == 'scissors'){
+      incrementComputerScore();
       return "You lose :( Scissors beats paper";
     }else{
       incrementScore();
@@ -51,6 +63,7 @@ function playRound (player1, computer){
       return "Tie! Scissors ties with scissors";
     }
     else if (computer == 'rock'){
+      incrementComputerScore();
       return "You lose :( Rock beats scissors";
     }else{
       incrementScore();
@@ -63,14 +76,14 @@ function playRound (player1, computer){
 function game(event){
 
   computerSelection = getComputerChoice();
-  playerSelection = event.target.id;
+  playerSelection = event.target.parentElement.id;
   console.log(playRound(playerSelection, computerSelection));
 
 }
 
-//game();
-var score = 0;
+var playerScore = 0;
+var computerScore = 0;
 const buttons = document.querySelectorAll('button');
-const scoreElement = document.querySelector('.score');
-console.log(buttons);
+const playerScoreElement = document.querySelector('.scores #player p');
+const computerScoreElement = document.querySelector('.scores #computer p');
 buttons.forEach( key => key.addEventListener(('click'), game));
